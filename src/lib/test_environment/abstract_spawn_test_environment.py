@@ -83,6 +83,7 @@ class AbstractSpawnTestEnvironment(DockerBaseTask,
             database_container_network_aliases = " ".join(test_environment_info.database_info.container_info.network_aliases)
             environment_variables+=f"""ENVIRONMENT_DATABASE_CONTAINER_NETWORK_ALIASES="{database_container_network_aliases}"\n"""
             environment_variables+=f"""ENVIRONMENT_DATABASE_CONTAINER_IP_ADDRESS={test_environment_info.database_info.container_info.ip_address}\n"""
+            environment_variables+=f"""ENVIRONMENT_DATABASE_CONTAINER_VOLUMNE_NAME={test_environment_info.database_info.container_info.volume_name}\n"""
             db_container = self._client.containers.get(test_environment_info.database_info.container_info.container_name)
             db_container.reload()
             default_bridge_ip_address=db_container.attrs["NetworkSettings"]["Networks"]["bridge"]["IPAddress"]
